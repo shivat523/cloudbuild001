@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['storage', 'buckets', 'create', 'gs://your-bucket-name']
+  args: ['storage', 'buckets', 'create', 'thunderbolt2000']
 
 options:
   logging: CLOUD_LOGGING_ONLY
