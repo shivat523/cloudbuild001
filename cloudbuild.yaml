@@ -1,6 +1,19 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['storage', 'buckets', 'create', 'thunderbolt2000']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/webx-424701/flask-app', '.']
 
-options:
-  logging: CLOUD_LOGGING_ONLY
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/webx-424701/flask-app']
+
+- name: 'gcr.io/cloud-builders/kubectl'
+  args:
+  - 'set'
+  - 'image'
+  - 'deployment/flask-app-deployment'
+  - 'flask-app=gcr.io/webx-424701/flask-app'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
+
+images:
+- 'gcr.io/webx-424701/flask-app'
