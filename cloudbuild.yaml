@@ -17,3 +17,6 @@ steps:
 
 images:
 - 'gcr.io/webx-424701/flask-app'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
